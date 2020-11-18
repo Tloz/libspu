@@ -10,7 +10,10 @@
 
 using namespace std;
 
-float randFloatInRange(float min, float max);
+namespace libpsu
+{
+    float randFloatInRange(float min, float max);
+}
 
 
 #endif // RANDOM_H
