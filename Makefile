@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS=--std=c++11
-LDFLAGS=-Lbin -lspu
+LDFLAGS=-Lbin
 CFLAGSSTRICT=-W -Wall -Wextra -pedantic
 CFLAGSSUPERSTRICT=-Werror
 CFLAGSCHEAT=-fpermissive -Wunused-variable
