@@ -25,7 +25,7 @@ obj/random.o: src/random.cpp inc/random.h
 obj/base64.o: src/base64.cpp inc/base64.h
 	$(CC) -c $< -o $@ $(CFLAGS)
 
-obj/paser.o: src/parser.cpp inc/parser.h
+obj/parser.o: src/parser.cpp inc/parser.h
 	$(CC) -c $< -o $@ $(CFLAGS)
 
 ########################
