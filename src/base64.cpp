@@ -1,3 +1,6 @@
+// Original work all from René Nyffenegger
+// Just modified the file to suit namespace needs
+
 /*
    base64.cpp and base64.h
 
@@ -31,7 +34,7 @@
 
 */
 
-#include "base64.h"
+#include "../inc/base64.h"
 
 #include <algorithm>
 #include <stdexcept>
@@ -94,21 +97,21 @@ static std::string encode_with_line_breaks(String s) {
 }
 
 template <typename String>
-static std::string encode_pem(String s) {
+static std::string libspu::base64::encode_pem(String s) {
   return encode_with_line_breaks<String, 64>(s);
 }
 
 template <typename String>
-static std::string encode_mime(String s) {
+static std::string libspu::base64::encode_mime(String s) {
   return encode_with_line_breaks<String, 76>(s);
 }
 
 template <typename String>
-static std::string encode(String s, bool url) {
+static std::string libspu::base64::encode(String s, bool url) {
   return base64_encode(reinterpret_cast<const unsigned char*>(s.data()), s.length(), url);
 }
 
-std::string base64_encode(unsigned char const* bytes_to_encode, size_t in_len, bool url) {
+std::string libspu::base64::encode(unsigned char const* bytes_to_encode, size_t in_len, bool url) {
 
     size_t len_encoded = (in_len +2) / 3 * 4;
 
@@ -160,7 +163,7 @@ std::string base64_encode(unsigned char const* bytes_to_encode, size_t in_len, b
 }
 
 template <typename String>
-static std::string decode(String encoded_string, bool remove_linebreaks) {
+static std::string libspu::base64::decode(String encoded_string, bool remove_linebreaks) {
  //
  // decode(…) is templated so that it can be used with String = const std::string&
  // or std::string_view (requires at least C++17)
@@ -174,7 +177,7 @@ static std::string decode(String encoded_string, bool remove_linebreaks) {
 
        copy.erase(std::remove(copy.begin(), copy.end(), '\n'), copy.end());
 
-       return base64_decode(copy, false);
+       return libspu::base64::decode(copy, false);
     }
 
     size_t length_of_string = encoded_string.length();
@@ -212,20 +215,20 @@ static std::string decode(String encoded_string, bool remove_linebreaks) {
     return ret;
 }
 
-std::string base64_decode(std::string const& s, bool remove_linebreaks) {
-   return decode(s, remove_linebreaks);
+std::string libspu::base64::decode(std::string const& s, bool remove_linebreaks) {
+   return libspu::base64::decode(s, remove_linebreaks);
 }
 
-std::string base64_encode(std::string const& s, bool url) {
-   return encode(s, url);
+std::string libspu::base64::encode(std::string const& s, bool url) {
+   return libspu::base64::encode(s, url);
 }
 
-std::string base64_encode_pem (std::string const& s) {
-   return encode_pem(s);
+std::string libspu::base64::encode_pem (std::string const& s) {
+   return libspu::base64::encode_pem(s);
 }
 
-std::string base64_encode_mime(std::string const& s) {
-   return encode_mime(s);
+std::string libspu::base64::encode_mime(std::string const& s) {
+   return libspu::base64::encode_mime(s);
 }
 
 #if __cplusplus >= 201703L
@@ -235,20 +238,20 @@ std::string base64_encode_mime(std::string const& s) {
 // Provided by Yannic Bonenberger (https://github.com/Yannic)
 //
 
-std::string base64_encode(std::string_view s, bool url) {
-   return encode(s, url);
+std::string libspu::base64::encode(std::string_view s, bool url) {
+   return libspu::base64::encode(s, url);
 }
 
-std::string base64_encode_pem(std::string_view s) {
-   return encode_pem(s);
+std::string libspu::base64::encode_pem(std::string_view s) {
+   return libspu::base64::encode_pem(s);
 }
 
-std::string base64_encode_mime(std::string_view s) {
-   return encode_mime(s);
+std::string libspu::base64::encode_mime(std::string_view s) {
+   return libspu::base64::encode_mime(s);
 }
 
-std::string base64_decode(std::string_view s, bool remove_linebreaks) {
-   return decode(s, remove_linebreaks);
+std::string libspu::base64::decode(std::string_view s, bool remove_linebreaks) {
+   return libspu::base64::decode(s, remove_linebreaks);
 }
 
 #endif  // __cplusplus >= 201703L
