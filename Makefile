@@ -6,26 +6,33 @@ CFLAGSSUPERSTRICT=-Werror
 CFLAGSCHEAT=-fpermissive -Wunused-variable
 CFLAGSOPT=-O3
 
-all: libspu test
+all: libspu tests
 
 libspu: bin/libspu.a
 
-test: bin/libspu.a main.cpp
-	$(CC) $^ $(LDFLAGS) -o bin/$@ $(CFLAGS) $(CFLAGSSTRICT)
-
-bin/libspu.a: obj/random.o obj/base64.o
+bin/libspu.a: obj/version.o obj/random.o obj/base64.o
 	ar rcs $@ $^
 
-######## PARTS ########
-obj/random.o: src/random.cpp inc/random.h
+tests: version random
+
+######### PARTS ########
+obj/version.o: src/version.cpp inc/version.h
 	$(CC) -c $< -o $@ $(CFLAGS)
 
+obj/random.o: src/random.cpp inc/random.h
+	$(CC) -c $< -o $@ $(CFLAGS)
 
 obj/base64.o: src/base64.cpp inc/base64.h
 	$(CC) -c $< -o $@ $(CFLAGS)
 
-
 ########################
+
+######### TESTS ########
+version: obj/version.o tests/version.cpp
+	$(CC) $^ -o bin/$@ $(CFLAGS) $(CFLAGSSTRICT)
+
+random: obj/random.o tests/random.cpp
+	$(CC) $^ -o bin/$@ $(CFLAGS) $(CFLAGSSTRICT)
 
 
 .PHONY: clean mrproper

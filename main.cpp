@@ -30,7 +30,7 @@ namespace libpsu
 
 int main(int argc, char const *argv[])
 {
-    // cout << "Base64: " << libspu::base64::encode(string("You will never catch me haha !")) << endl;
+    cout << "Base64: " << libspu::base64_encode(string("You will never catch me haha")) << endl;
     if((argc > 1) && (string(argv[1]).compare(string("-v")) == 0))
     {
         libpsu::version();

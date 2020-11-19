@@ -1,12 +1,19 @@
 #ifndef RANDOM_H
 #define RANDOM_H
 
+#include <cstdlib>
 
 using namespace std;
 
-namespace libpsu
+// 
+// TODO: throw exception when min > max
+// 
+
+namespace libspu
 {
-    float randFloatInRange(float min, float max);
+    int random_int(int min = 0 , int max = RAND_MAX);
+    float random_float();
+    float random_float(float min, float max);
 }
 
 
