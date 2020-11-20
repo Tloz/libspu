@@ -9,15 +9,13 @@ libspu::TDArray::TDArray()
 
 libspu::TDArray::TDArray(int col, int row, int defaultValue) : m_col(col), m_row(row)
 {
-    // m_col = col;
-    // m_row = row;
     m_array = new int*[m_row];
     for(int i = 0; i < m_row; i++)
         m_array[i] = new int[m_col];
 
     for (int i = 0; i < row; ++i)
         for (int j = 0; j < m_col; ++j)
-            m_array[i][j] = i * m_col + j + 1;
+            m_array[i][j] = defaultValue;
 }
 
 libspu::TDArray::~TDArray()
