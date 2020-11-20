@@ -8,6 +8,8 @@ using namespace std;
 int main()
 {
     libspu::TDArray tab(10, 6);
+    // libspu::TDArray tab(0, 6);
+
     tab.display(true);
     cout << "Assertion tab.cardinal() == 60 ... ";
     assert(tab.cardinal() == 60);

@@ -9,6 +9,9 @@ libspu::TDArray::TDArray()
 
 libspu::TDArray::TDArray(int width, int height, int defaultValue) : m_width(width), m_height(height)
 {
+    if((m_width * m_height) == 0)
+        throw bad_alloc();
+
     m_array = new int*[m_height];
     for(int i = 0; i < m_height; i++)
     {
