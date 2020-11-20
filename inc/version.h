@@ -2,8 +2,8 @@
 #include <string>
 
 #define SPU_SEMVER_x 0
-#define SPU_SEMVER_y 0
-#define SPU_SEMVER_z 1
+#define SPU_SEMVER_y 1
+#define SPU_SEMVER_z 0
 
 using namespace std;
 
