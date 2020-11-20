@@ -4,8 +4,8 @@ namespace libspu
     {
     private:
         int** m_array;
-        int m_row;
         int m_col;
+        int m_row;
 
     public:
         TDArray();
