@@ -1,5 +1,5 @@
-#ifndef 2DArray_H
-#define 2DArray_H
+#ifndef TDARRAY_H
+#define TDARRAY_H
 
 namespace libspu
 {
