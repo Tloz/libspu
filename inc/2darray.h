@@ -1,3 +1,6 @@
+#ifndef 2DArray_H
+#define 2DArray_H
+
 namespace libspu
 {
     class TDArray
@@ -57,3 +60,6 @@ namespace libspu
         int sumOnCol(int index) const;
     };
 }
+
+
+#endif
