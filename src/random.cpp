@@ -1,5 +1,7 @@
 #include "../inc/random.h"
 
+using namespace std;
+
 int libspu::random_int(int min, int max)
 {
     if(min > max)
@@ -21,6 +23,11 @@ float libspu::random_float(float min, float max)
 
 string libspu::random_string(int length)
 {
+    /* TODO:
+     * Do this in a way where you don't allocate memory
+     * compute ascii code instead
+     */
+
     if(length <= 0)
         throw exception();
 
