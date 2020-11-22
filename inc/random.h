@@ -1,27 +1,42 @@
 #ifndef RANDOM_H
 #define RANDOM_H
 
-//
-//        /!\ DISCLAIMER /!\
-//
-//  Before use, please note that none
-//  of these functions are suitable
-//  for SECURITY purposes. DO NOT use
-//  them to generate passwords
-//  or, you know, ssh keys of ANY KIND
-//
-//                 You've been warned.
-//
+/***************************************************************************
+*             RNG module for SimpleProjectUtilities
+*
+*   File    : random.h
+*   Author  : Emeric Frémion <ScrimeT@hotmail.fr>
+*   Date    : November 22, 2020
+*   Licence : The Unlicence - https://unlicense.org/
+*   Repo    : https://github.com/Tloz/libspu
+*   Purpose : Header for generating random values functions.
+*             Part of the SimpleProjectUtilities library
+*
+****************************************************************************
+*                                                        _____________________________________
+*                      /!\ DISCLAIMER /!\               / If you're just a tiny bit concerned \
+*                                                       \ about security, please read this    /
+*                Before use, please note that none       -------------------------------------
+*                of these functions are suitable                \   ^__^
+*                for SECURITY purposes. DO NOT use               \  (oo)\_______
+*                them to generate passwords or worse,               (__)\       )\/\
+*                you know, like ssh keys of ANY KIND                    ||----w |
+*                                                                       ||     ||
+*                               You've been warned.
+*
+\**************************************************************************/
 
-#include <cstdlib>
+
+/**************************************************************************\
+*                  REQUIRED HEADERS AND MACRO DEFINITION                   *
+\**************************************************************************/
+
 #include <string>
+#include <cstdlib> // For RAND_MAX
 
-// #define CHAR_MIN 1
-// #define CHAR_MAJ 2
-// #define CHAR_NUMBERS 4
-// #define CHAR_SPECIAL 8
-
-using namespace std;
+/**************************************************************************\
+*                               PROTOTYPES                                 *
+\**************************************************************************/
 
 namespace libspu
 {
@@ -34,8 +49,9 @@ namespace libspu
     //returns a random float between min and max
     float random_float(float min, float max);
 
-    // returns a random string of length char picked from set
-    string random_string(int length = 10);
+    // returns a random string of length alnum char
+    std::string random_string(int length = 10);
 }
 
-#endif // RANDOM_H
+#endif // RANDOM_H /*************** END OF FILE - random.h ****************/
+

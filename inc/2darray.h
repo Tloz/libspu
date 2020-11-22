@@ -1,12 +1,55 @@
 #ifndef TDARRAY_H
 #define TDARRAY_H
 
+/***************************************************************************
+*             Two Dimensionnal Array module for SimpleProjectUtilities
+*
+*   File    : 2darray.h
+*   Author  : Emeric Frémion <ScrimeT@hotmail.fr>
+*   Date    : November 22, 2020
+*   Licence : The Unlicence - https://unlicense.org/
+*   Repo    : https://github.com/Tloz/libspu
+*   Purpose : Header for Two-Dimensionnal Array management.
+*             Part of the SimpleProjectUtilities library
+*
+***************************************************************************/
+
+/**************************************************************************\
+*                              IMPORTANT NOTES                             *
+****************************************************************************
+*
+*             Please note that the TDArray class deprecated as of v0.2.2
+*             Next major version (1.0.0) will not support it anymore.
+*             You will be able to update your code usin a matrix class
+*             with more fun and less memory leaks (yup, I'll use vectors)
+*
+*             _________________________________________
+*            / Be careful next time you update libspu, \
+*            | as next upgrade will break backwards    |
+*            \ compatibility for this module           /
+*             -----------------------------------------
+*                 \
+*                  \
+*                    ,__, |    | 
+*                    (oo)\|    |___
+*                    (__)\|    |   )\_
+*                         |    |_w |  \
+*                         |    |  ||   *
+*
+***************************************************************************/
+
+
+/**************************************************************************\
+*                 DECLARATION OF CLASS, MEMBERS AND METHOD                 *
+\**************************************************************************/
+
 namespace libspu
 {
     class TDArray
     {
     private:
         int** m_array;
+    protected:
         int m_width;
         int m_height;
 
@@ -63,3 +106,4 @@ namespace libspu
 
 
 #endif
+

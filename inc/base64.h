@@ -1,5 +1,5 @@
-// Original work all from René Nyffenegger
-// Just modified the file to suit namespace needs
+// Original work from René Nyffenegger
+// Files are modified to fit functions into lispu namespace
 
 //
 //  base64 encoding and decoding with C++.

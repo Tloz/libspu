@@ -6,6 +6,6 @@ using namespace std;
 
 int main()
 {
-    libspu::version_info();
+    cout << libspu::version() << endl;;
     return 0;
 }
