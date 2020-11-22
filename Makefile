@@ -15,7 +15,7 @@ archive: libspu header LICENSE version
 	tar -czf lib/libspu.v$(shell ./bin/version).tar.gz LICENSE lib/libspu.a lib/ inc/*.h
 	@rm -rf lib/libspu.a inc/libspu.h
 
-header: inc/base.h inc/version.h inc/random.h inc/2darray.h inc/parser.h
+header: inc/first.h inc/version.h inc/random.h inc/2darray.h inc/parser.h
 	cat $^ >> inc/libspu.h
 	
 
@@ -24,7 +24,7 @@ libspu: bin/libspu.a
 bin/libspu.a: obj/version.o obj/random.o obj/parser.o obj/2darray.o
 	ar rcs $@ $^
 
-tests: version random 2darray base64
+tests: version random 2darray
 
 ######### PARTS ########
 obj/version.o: src/version.cpp inc/version.h
