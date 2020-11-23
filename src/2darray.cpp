@@ -2,13 +2,15 @@
 #include <iostream>
 using namespace std;
 
-libspu::TDArray::TDArray()
+[[deprecated]] libspu::TDArray::TDArray()
 {
+    // #warning "TDArray class is deprecated since v0.2.2"
 
 }
 
-libspu::TDArray::TDArray(int width, int height, int defaultValue) : m_width(width), m_height(height)
+[[deprecated]] libspu::TDArray::TDArray(int width, int height, int defaultValue) : m_width(width), m_height(height)
 {
+    // #warning "TDArray class is deprecated since v0.2.2"
     if((m_width * m_height) == 0)
         throw bad_alloc();
 
