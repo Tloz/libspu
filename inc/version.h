@@ -14,9 +14,9 @@
 ***************************************************************************
 *                   _________________________________________
 *                  / Hi, I'm Marguerite, and I will guide    \
-*                  | you through this file, catching your    |
-*                  | attention on some important points.     |
-*                  \ Keep your eyes open!                    /
+*                  | you through headers files, catching     |
+*                  | your attention on some important points |
+*                  \ Keep your eyes open !                   /
 *                   -----------------------------------------
 *                          \   ^__^
 *                           \  (oo)\_______
