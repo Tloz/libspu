@@ -14,16 +14,25 @@
 *
 ***************************************************************************/
 
-
 /**************************************************************************\
 *                              IMPORTANT NOTES                             *
 ****************************************************************************
 *
-*       Since the TDstd::array class has been deprecated in v0.2.2, this is the
+*       Since the TDArray class has been deprecated in v0.2.2, this is the
 *       class that will do roughly the same job in a more clean and
 *       efficient way. The dimensions are not needed at compile time.
 *
+***************************************************************************
+*
+*       It is currently not possible to have template declaration separated
+*       from it's implementation (see https://stackoverflow.com/questions\
+*       /495021/why-can-templates-only-be-implemented-in-the-header-file
+*       and https://stackoverflow.com/questions/5417465/separating-template\
+*       -interface-and-implementation-in-c for more info).
+*       So enjoy the source here. Thanks, C++
+*
 ***************************************************************************/
+
 
 /**************************************************************************\
 *                  REQUIRED HEADERS AND MACRO DEFINITION                   *
@@ -35,74 +44,87 @@
 /**************************************************************************\
 *                DECLARATION OF CLASS, MEMBERS AND METHODS                 *
 \**************************************************************************/
-// This part is outrageously stolen from https://stackoverflow.com/questions/37259936/template-c-to-allocate-dynamic-matrix-2d
+// This part is outrageously stolen from https://stackoverflow.com/\
+// questions/37259936/template-c-to-allocate-dynamic-matrix-2d
+
+using namespace std;
 
 namespace libspu
 {
     template<class TYPE>
     class Matrix2D
     {
+    private:
+        size_t m_height, m_width;
+        std::vector<TYPE> m_matrix;
     public:
-        Matrix2D(size_t numrows, size_t numcols);
-        Matrix2D(size_t numrows, size_t numcols, TYPE init);
-        ~Matrix2D();
-        TYPE & operator()(size_t x, size_t y);
-        TYPE operator()(size_t x, size_t y) const;
-        size_t getRows() const;
-        size_t getColumns() const;
-        friend std::ostream & operator<<(std::ostream & out, const Matrix2D & in);
+        Matrix2D(size_t height, size_t width) :
+                m_height(height), m_width(width), m_matrix(m_height * m_width)
+        {
+            if((m_height * m_width) == 0)
+                throw std::logic_error("None of the dimension can be zero.");
+        }
+
+        Matrix2D(size_t height, size_t width, TYPE init) :
+                m_height(height), m_width(width), m_matrix(m_height * m_width, init)
+        {
+            if((m_height * m_width) == 0)
+                throw std::logic_error("None of the dimension can be zero.");
+        }
+
+        // This function is used when you want to acces an element to replace it
+        TYPE & operator()(size_t x, size_t y)
+        {
+            // As a size_t is always at least 0, we don't have to check if
+            // the coordinates are below zero, just over dimensions
+            if(x >= m_width)
+                throw std::out_of_range("x has to be less than " + std::to_string(m_width) + " (current x = " + std::to_string(x) + ")");
+            if(y >= m_height)
+                throw std::out_of_range("y has to be less than " + std::to_string(m_width) + " (current y = " + std::to_string(y) + ")");
+            return m_matrix[y * m_width + x];
+        }
+
+        TYPE operator()(size_t x, size_t y) const
+        {
+            // As a size_t is always at least 0, we don't have to check if
+            // the coordinates are below zero, just over dimensions
+            // if(x >= m_width)
+            //     throw std::out_of_range("x has to be less than " + std::to_string(m_width) + " (current x = " + std::to_string(x) + ")");
+            // if(y >= m_height)
+            //     throw std::out_of_range("y has to be less than " + std::to_string(m_width) + " (current y = " + std::to_string(y) + ")");
+            return m_matrix[y * m_width + x];
+        }
+
+        size_t height() const
+        {
+            return m_height;
+        }
+
+        size_t width() const
+        {
+            return m_width;
+        }
+
+        friend std::ostream & operator<<(std::ostream & out, const Matrix2D & in)
+        {
+            for (unsigned int i = 0; i < in.height(); i++)
+            {
+                for (unsigned int j = 0; j < in.width(); j++)
+                {
+                    out << in(i, j) << ' ';
+                }
+                out << std::endl;
+            }
+
+            return out;
+        }
+
+        size_t cardinal() const
+        {
+            return m_width * m_height;
+        }
     };
 }
-
-    ///////////////////////////////////////////////////////////////////////////////
-        /*
-    class Matrix2D
-    {
-    private:
-        size_t m_width;
-        size_t m_height;
-        std::array< std::array<typename T, m_height>, m_width> m_data;
-
-    public:
-        // ctors and dtors
-        // this one is empty, do not use
-        Matrix2D();
-        // use this one
-        Matrix2D(size_t width, size_t height, <typename T> type);
-        ~Matrix2D();
-
-        // fills all cells with default value
-        void init(template<typename T> defaultValue);
-
-        // returns the number of cells in matrix
-        size_t cardinal() const;
-
-        // displays the matrix, fancy will show indexes
-        void display(bool fancy = false) const;
-
-        // returns width of the matrix
-        size_t width() const;
-
-        // returns height of the matrix
-        size_t height() const;
-
-        // return all the numbers in row index set top to true if you want to input 
-        // your y value from the top (like a programmer)
-        // or from the bottom (like a normal human beeing)
-        <typename T> row(int index, bool top = false) const;
-
-        // return all the numbers in column index
-        <typename T> col(int index) const;
-
-        // returns the number at (x;y) 
-        // top is the same as with row method
-        <typename T> at(int x, int y, bool top = false) const;
-        
-        // replace current value at (x;y) with newVal
-        // top is the same as with row method
-        void set(int x, int y, <typename T> newVal, bool top = false);
-    };
-    */
 
 #endif // MATRIX2D_H /*************** END OF FILE - matrix2d.h **************/
 
