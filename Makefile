@@ -10,15 +10,17 @@ all: libspu tests
 
 archive: libspu header LICENSE version
 	@mv tmp/libspu.h inc/libspu.h
+	@ln out/libspu.a libspu.a
 	tar -czf libspu.v$(shell ./bin/version).tar.gz LICENSE libspu.a inc/*.h
 	@rm -rf inc/libspu.h
+	@rm libspu.a
 
-header: inc/first.h inc/version.h inc/random.h inc/2darray.h inc/parser.h
+header: inc/version.h inc/random.h inc/2darray.h inc/parser.h
 	@cat $^ >> tmp/libspu.h
 
-libspu: libspu.a
+libspu: out/libspu.a
 
-libspu.a: obj/version.o obj/random.o obj/parser.o obj/2darray.o obj/matrix2d.o
+out/libspu.a: obj/version.o obj/random.o obj/parser.o obj/2darray.o obj/matrix2d.o
 	ar rcs $@ $^
 
 tests: version random 2darray
@@ -71,4 +73,5 @@ clean:
 
 mrproper: clean
 	@rm -rf bin/*
+	@rm -rf out/*
 	@rm -rf libspu.*
