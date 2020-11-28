@@ -7,7 +7,7 @@ using namespace std;
 // Use this if you want to add detail on SEMVER
 // Using this cuz we cant leave an empty #define
 // Yes, I know, that's ugly
-string SPU_SEMVER_addendum("-pro");
+string SPU_SEMVER_addendum("-alpha.Matrix");
 
 int libspu::version_x()
 {

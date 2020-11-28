@@ -11,19 +11,19 @@ all: libspu tests
 archive: libspu header LICENSE version
 	@mv tmp/libspu.h inc/libspu.h
 	@ln out/libspu.a libspu.a
-	tar -czf libspu.v$(shell ./bin/version).tar.gz LICENSE libspu.a inc/*.h
+	tar -czf out/libspu.v$(shell ./bin/version).tar.gz LICENSE libspu.a inc/*.h
 	@rm -rf inc/libspu.h
 	@rm libspu.a
 
-header: inc/version.h inc/random.h inc/2darray.h inc/parser.h
+header: inc/version.h inc/random.h inc/parser.h
 	@cat $^ >> tmp/libspu.h
 
 libspu: out/libspu.a
 
-out/libspu.a: obj/version.o obj/random.o obj/parser.o obj/2darray.o obj/matrix2d.o
+out/libspu.a: obj/version.o obj/random.o obj/parser.o obj/matrix2d.o
 	ar rcs $@ $^
 
-tests: version random 2darray
+tests: version random matrix2d
 
 ######### PARTS ########
 obj/version.o: src/version.cpp inc/version.h
@@ -38,10 +38,7 @@ obj/random.o: src/random.cpp inc/random.h
 obj/parser.o: src/parser.cpp inc/parser.h
 	$(CC) -c $< -o $@ $(CFLAGS) $(CFLAGSSTRICT)
 
-obj/2darray.o: src/2darray.cpp inc/2darray.h
-	$(CC) -c $< -o $@ $(CFLAGS) $(CFLAGSSTRICT)
-
-obj/matrix2d.o: src/matrix2d.cpp inc/matrix2d.h
+obj/matrix2d.o: src/matrix2d.cpp
 	$(CC) -c $< -o $@ $(CFLAGS) $(CFLAGSSTRICT)
 
 
@@ -52,9 +49,6 @@ version: obj/version.o tests/version.cpp
 	$(CC) $^ -o bin/$@ $(CFLAGS) $(CFLAGSSTRICT)
 
 random: obj/random.o tests/random.cpp
-	$(CC) $^ -o bin/$@ $(CFLAGS) $(CFLAGSSTRICT)
-
-2darray: src/2darray.o tests/2darray.cpp
 	$(CC) $^ -o bin/$@ $(CFLAGS) $(CFLAGSSTRICT)
 
 #base64: obj/base64.o tests/base64.cpp

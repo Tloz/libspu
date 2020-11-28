@@ -95,8 +95,8 @@
 #include <string>
 
 #define SPU_SEMVER_x 0
-#define SPU_SEMVER_y 2
-#define SPU_SEMVER_z 2
+#define SPU_SEMVER_y 3
+#define SPU_SEMVER_z 0
 
 /**************************************************************************\
 *                               PROTOTYPES                                 *
