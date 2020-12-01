@@ -124,6 +124,19 @@ namespace libspu
             return m_width * m_height;
         }
     };
+
+    template<class TYPE>
+    std::ostream &operator<<(ostream &flux, Matrix2D<TYPE> const& mat)
+    {
+        for (int y = 0; y < mat.height(); ++y)
+        {
+            for (int x = 0; x < mat.width(); ++x)
+            {
+                flux << mat(x, y) << " ";
+            }
+            flux << std::endl;
+        }
+    }
 }
 
 #endif // MATRIX2D_H /*************** END OF FILE - matrix2d.h **************/
