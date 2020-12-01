@@ -8,6 +8,9 @@ CFLAGSOPT=-O3
 
 all: libspu tests
 
+init:
+	mkdir tmp bin out lib
+
 archive: libspu header LICENSE version
 	@mv tmp/libspu.h inc/libspu.h
 	@ln out/libspu.a libspu.a
@@ -15,7 +18,8 @@ archive: libspu header LICENSE version
 	@rm -rf inc/libspu.h
 	@rm libspu.a
 
-header: inc/version.h inc/random.h inc/parser.h
+header: inc/version.h inc/random.h inc/parser.h inc/matrix2d.h
+	@rm tmp/libspu.h
 	@cat $^ >> tmp/libspu.h
 
 libspu: out/libspu.a
