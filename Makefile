@@ -19,8 +19,7 @@ archive: libspu header LICENSE version
 	@rm libspu.a
 
 header: inc/version.h inc/random.h inc/parser.h inc/matrix2d.h
-	@rm tmp/libspu.h
-	@cat $^ >> tmp/libspu.h
+	@cat $^ > tmp/libspu.h
 
 libspu: out/libspu.a
 
