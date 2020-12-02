@@ -50,3 +50,18 @@ void libspu::version_info()
     cout << " (using SEMVER)" << endl;
     cout << "Compiled on " << libspu::compiledate() << endl;
 }
+
+std::string libspu::info()
+{
+    return SPU_INFO;
+}
+
+std::string libspu::license()
+{
+    return SPU_LICENSE;
+}
+
+std::string libspu::license_info()
+{
+    return SPU_LICENSE_INFO;
+}

@@ -96,7 +96,10 @@
 
 #define SPU_SEMVER_x 0
 #define SPU_SEMVER_y 3
-#define SPU_SEMVER_z 0
+#define SPU_SEMVER_z 1
+#define SPU_INFO "https://github.com/Tloz/libspu"
+#define SPU_LICENSE "the unlicense"
+#define SPU_LICENSE_INFO "https://unlicense.org"
 
 /**************************************************************************\
 *                               PROTOTYPES                                 *
@@ -110,6 +113,9 @@ namespace libspu
     std::string version_a();
     std::string version();
     std::string compiledate();
+    std::string info();
+    std::string license();
+    std::string license_info();
     void version_info();
 }
 
