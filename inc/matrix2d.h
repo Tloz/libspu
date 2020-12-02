@@ -54,7 +54,7 @@ namespace libspu
     template<class TYPE>
     class Matrix2D
     {
-    private:
+    protected:
         size_t m_height, m_width;
         std::vector<TYPE> m_matrix;
     public:
@@ -70,6 +70,11 @@ namespace libspu
         {
             if((m_height * m_width) == 0)
                 throw std::logic_error("None of the dimension can be zero.");
+        }
+
+        std::vector<TYPE> matrix()
+        {
+            return m_matrix;
         }
 
         // This function is used when you want to acces an element to replace it
@@ -88,10 +93,10 @@ namespace libspu
         {
             // As a size_t is always at least 0, we don't have to check if
             // the coordinates are below zero, just over dimensions
-            // if(x >= m_width)
-            //     throw std::out_of_range("x has to be less than " + std::to_string(m_width) + " (current x = " + std::to_string(x) + ")");
-            // if(y >= m_height)
-            //     throw std::out_of_range("y has to be less than " + std::to_string(m_width) + " (current y = " + std::to_string(y) + ")");
+             if(x >= m_width)
+                    throw std::out_of_range("x has to be less than " + std::to_string(m_width) + " (current x = " + std::to_string(x) + ")");
+             if(y >= m_height)
+                    throw std::out_of_range("y has to be less than " + std::to_string(m_width) + " (current y = " + std::to_string(y) + ")");
             return m_matrix[y * m_width + x];
         }
 
