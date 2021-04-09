@@ -97,6 +97,7 @@
 #define SPU_SEMVER_x 0
 #define SPU_SEMVER_y 3
 #define SPU_SEMVER_z 2
+#define SPU_SEMVER_API_TARGET "https://api.github.com/repos/Tloz/libspu/releases/latest";
 #define SPU_INFO "https://github.com/Tloz/libspu"
 #define SPU_LICENSE "the unlicense"
 #define SPU_LICENSE_INFO "https://unlicense.org"
@@ -117,6 +118,10 @@ namespace libspu
     std::string license();
     std::string license_info();
     void version_info();
+
+    std::string getRemoteVersionString(std::string API_target);
+    int compareVersions(std::string remote, std::string local);
+    std::string readableVersionState(int code);
 }
 
 #endif // VERSION_H /************** END OF FILE - version.h ***************/
