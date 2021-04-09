@@ -51,6 +51,8 @@ namespace libspu
 
     // returns a random string of length alnum char
     std::string random_string(int length = 10);
+
+    int dice(int max, int min = 2);
 }
 
 #endif // RANDOM_H /*************** END OF FILE - random.h ****************/

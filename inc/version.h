@@ -96,7 +96,7 @@
 
 #define SPU_SEMVER_x 0
 #define SPU_SEMVER_y 3
-#define SPU_SEMVER_z 1
+#define SPU_SEMVER_z 2
 #define SPU_INFO "https://github.com/Tloz/libspu"
 #define SPU_LICENSE "the unlicense"
 #define SPU_LICENSE_INFO "https://unlicense.org"

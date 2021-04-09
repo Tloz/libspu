@@ -43,3 +43,8 @@ string libspu::random_string(int length)
     
     return tmp_s;
 }
+
+int libspu::dice(int dice_max_value)
+{
+    return random_int(1, dice_max_value);
+}
