@@ -7,7 +7,7 @@ using namespace std;
 // Use this if you want to add detail on SEMVER
 // Using this cuz we cant leave an empty #define
 // Yes, I know, that's ugly
-string SPU_SEMVER_addendum("-alpha.Matrix");
+string SPU_SEMVER_addendum(SPU_SEMVER_DEFADDENDUM);
 
 int libspu::version_x()
 {
@@ -69,7 +69,8 @@ std::string libspu::license_info()
 
 std::string libspu::getRemoteVersionString(std::string API_target)
 {
-    cout << endl << endl << "/!\\ WARNING: This is emulated, no connection made /!\\"; << endl << endl;
+    // TODO: proper fetchnig of version string
+    cout << endl << endl << "/!\\ WARNING: This is emulated, no connection made /!\\" << endl << endl;
     // cout << "Calling " + SPU_SEMVER_API_TARGET + "..." << endl;
     return "0.1.0";
     // return "0.2.0-alpha";

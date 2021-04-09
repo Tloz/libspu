@@ -6,15 +6,15 @@ CFLAGSSUPERSTRICT=-Werror
 CFLAGSCHEAT=-fpermissive -Wunused-variable
 CFLAGSOPT=-O3
 
-all: libspu tests
+all: libspu tests run_tests.sh
 
 init:
-	mkdir tmp bin out lib
+	mkdir tmp bin out lib utils
 
-archive: libspu header LICENSE version
+archive: all header LICENSE print_version
 	@mv tmp/libspu.h inc/libspu.h
 	@ln out/libspu.a libspu.a
-	tar -czf out/libspu.v$(shell ./bin/version).tar.gz LICENSE libspu.a inc/*.h
+	tar -czf out/libspu.v$(shell ./bin/print_version).tar.gz LICENSE libspu.a inc/*.h
 	@rm -rf inc/libspu.h
 	@rm libspu.a
 
@@ -22,11 +22,15 @@ header: inc/version.h inc/random.h inc/parser.h inc/matrix2d.h
 	@cat $^ > tmp/libspu.h
 
 libspu: out/libspu.a
+	
 
 out/libspu.a: obj/version.o obj/random.o obj/parser.o obj/matrix2d.o
 	ar rcs $@ $^
 
-tests: version random matrix2d
+tests: test_version test_random test_matrix2d
+
+print_version: obj/version.o utils/version.cpp
+	$(CC) $^ -o bin/$@ $(CFLAGS) $(CFLAGSSTRICT)
 
 ######### PARTS ########
 obj/version.o: src/version.cpp inc/version.h
@@ -48,16 +52,16 @@ obj/matrix2d.o: src/matrix2d.cpp
 ########################
 
 ######### TESTS ########
-version: obj/version.o tests/version.cpp
+test_version: obj/version.o tests/version.cpp
 	$(CC) $^ -o bin/$@ $(CFLAGS) $(CFLAGSSTRICT)
 
-random: obj/random.o tests/random.cpp
+test_random: obj/random.o tests/random.cpp
 	$(CC) $^ -o bin/$@ $(CFLAGS) $(CFLAGSSTRICT)
 
 #base64: obj/base64.o tests/base64.cpp
 #	$(CC) $^ -o bin/$@ $(CFLAGS) $(CFLAGSSTRICT)
 
-matrix2d: obj/matrix2d.o tests/matrix2d.cpp
+test_matrix2d: obj/matrix2d.o tests/matrix2d.cpp
 	$(CC) $^ -o bin/$@ $(CFLAGS) $(CFLAGSSTRICT)
 
 
