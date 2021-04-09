@@ -93,11 +93,12 @@
 *                  REQUIRED HEADERS AND MACRO DEFINITION                   *
 \**************************************************************************/
 #include <string>
+#include <vector>
 
 #define SPU_SEMVER_x 0
 #define SPU_SEMVER_y 3
 #define SPU_SEMVER_z 2
-#define SPU_SEMVER_DEFADDENDUM "-version_compare"
+#define SPU_SEMVER_DEFADDENDUM ""
 #define SPU_SEMVER_API_TARGET "https://api.github.com/repos/Tloz/libspu/releases/latest";
 #define SPU_INFO "https://github.com/Tloz/libspu"
 #define SPU_LICENSE "the unlicense"
@@ -121,7 +122,8 @@ namespace libspu
     void version_info();
 
     std::string getRemoteVersionString(std::string API_target);
-    int compareVersions(std::string remote, std::string local);
+    std::vector<std::string> decomposeSemverString(std::string semver);
+    int compareVersions(std::vector<std::string> remote, std::vector<std::string> local);
     std::string readableVersionState(int code);
 }
 

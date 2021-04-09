@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 
 #include "../inc/version.h"
 
@@ -34,7 +35,10 @@ string libspu::version()
     string v("");
     v += to_string(SPU_SEMVER_x) + "." + to_string(SPU_SEMVER_y) + "." + to_string(SPU_SEMVER_z);
     if(SPU_SEMVER_addendum.length() != 0)
-        v += SPU_SEMVER_addendum;
+    {
+        v += "-";
+        v += SPU_SEMVER_DEFADDENDUM;
+    }
     return v;
 }
 
@@ -51,47 +55,72 @@ void libspu::version_info()
     cout << "Compiled on " << libspu::compiledate() << endl;
 }
 
-std::string libspu::info()
+string libspu::info()
 {
     return SPU_INFO;
 }
 
-std::string libspu::license()
+string libspu::license()
 {
     return SPU_LICENSE;
 }
 
-std::string libspu::license_info()
+string libspu::license_info()
 {
     return SPU_LICENSE_INFO;
 }
 
 
-std::string libspu::getRemoteVersionString(std::string API_target)
+string libspu::getRemoteVersionString(string API_target)
 {
     // TODO: proper fetchnig of version string
-    cout << endl << endl << "/!\\ WARNING: This is emulated, no connection made /!\\" << endl << endl;
+    cout << endl << "/!\\ WARNING: This is emulated, no connection made /!\\" << endl << endl;
     // cout << "Calling " + SPU_SEMVER_API_TARGET + "..." << endl;
-    return "0.1.0";
-    // return "0.2.0-alpha";
-    // return "1.0.0";
-    // return "2.3.5";
-    // return "3.0.1-rc";
+    return "0.3.2-alpha";
 }
 
-int libspu::compareVersions(std::string remote, std::string local)
+vector<string> split(string strToSplit, char delimeter)
 {
-    // TODO: split remote into numbers
-    unsigned int remote_major;
-    unsigned int remote_minor;
-    unsigned int remote_patch;
-    std::string remote_metadata;
-    unsigned int local_major = SPU_SEMVER_x;
-    unsigned int local_minor = SPU_SEMVER_y;
-    unsigned int local_patch = SPU_SEMVER_z;
-    std::string local_metadata = SPU_SEMVER_addendum;
+    int parts = 0;
+    stringstream ss(strToSplit);
+    string item;
+    vector<string> splittedStrings;
+    while (getline(ss, item, delimeter))
+    {
+       splittedStrings.push_back(item);
+    }
+    return splittedStrings;
+}
 
-    // TODO:assign values to above variable by cutting parameters properly
+vector<string> libspu::decomposeSemverString(string semver)
+{
+    vector<string> tmp = split(semver, '-');
+    vector<string> retval = split(tmp[0], '.');
+    if(tmp.size() > 1)
+    {
+        retval.push_back(tmp[1]);
+    }
+
+    return retval;
+
+}
+
+int libspu::compareVersions(vector<string> remote, vector<string> local)
+{
+    string local_metadata("");
+    unsigned int local_major = stoi(local[0]);
+    unsigned int local_minor = stoi(local[1]);
+    unsigned int local_patch = stoi(local[2]);
+    if(local.size() > 3)
+        local_metadata = local[3];
+
+    string remote_metadata("");
+    unsigned int remote_major = stoi(remote[0]);
+    unsigned int remote_minor = stoi(remote[1]);
+    unsigned int remote_patch = stoi(remote[2]);
+    if(remote.size() > 3)
+        remote_metadata = remote[3];
+
 
     if(remote_major > local_major)
         return 4; // There is a new major version
@@ -99,12 +128,12 @@ int libspu::compareVersions(std::string remote, std::string local)
         return 3; // There is a new minor version
     if(remote_patch > local_patch)
         return 2; // There is a new patch
-    if(remote_metadata != local_metadata) // WARNING, non properway to compare strings !!!!
+    if(remote_metadata.compare(local_metadata) != 0)
         return 1; // There is an other build
     return 0; // remote and local versions are the same or local version is ahead of repo
 }
 
-std::string libspu::readableVersionState(int code)
+string libspu::readableVersionState(int code)
 {
     switch(code)
     {
@@ -113,7 +142,7 @@ std::string libspu::readableVersionState(int code)
         break;
 
         case 1:
-        return "There is a new build";
+        return "Remote build is different than yours";
         break;
 
         case 2:
