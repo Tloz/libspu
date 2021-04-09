@@ -6,7 +6,8 @@ CFLAGSSUPERSTRICT=-Werror
 CFLAGSCHEAT=-fpermissive -Wunused-variable
 CFLAGSOPT=-O3
 
-all: libspu tests run_tests.sh
+all: libspu tests utils/run_tests.sh
+	utils/run_tests.sh
 
 init:
 	mkdir tmp bin out lib utils
