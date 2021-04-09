@@ -30,7 +30,7 @@ out/libspu.a: obj/version.o obj/random.o obj/parser.o obj/matrix2d.o
 
 tests: test_version test_random test_matrix2d
 
-print_version: obj/version.o utils/version.cpp
+print_version: obj/version.o utils/print_version.cpp
 	$(CC) $^ -o bin/$@ $(CFLAGS) $(CFLAGSSTRICT)
 
 ######### PARTS ########
