@@ -40,19 +40,19 @@
 
 namespace libspu
 {
-    //returns a random int between min and max
-    int random_int(int min = 0 , int max = RAND_MAX);
+        //returns a random int between min and max
+        int random_int(int min = 0 , int max = RAND_MAX);
 
-    //returns a random float
-    float random_float();
+        //returns a random float
+        float random_float();
 
-    //returns a random float between min and max
-    float random_float(float min, float max);
+        //returns a random float between min and max
+        float random_float(float min, float max);
 
-    // returns a random string of length alnum char
-    std::string random_string(int length = 10);
+        // returns a random string of length alnum char
+        std::string random_string(int length = 10);
 
-    int dice(int dice_max_value);
+        int dice(int dice_max_value);
 }
 
 #endif // RANDOM_H /*************** END OF FILE - random.h ****************/

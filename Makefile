@@ -40,8 +40,8 @@ obj/version.o: src/version.cpp inc/version.h
 obj/random.o: src/random.cpp inc/random.h
 	$(CC) -c $< -o $@ $(CFLAGS) $(CFLAGSSTRICT)
 
-#obj/base64.o: src/base64.cpp inc/base64.h
-#	$(CC) -c $< -o $@ $(CFLAGS)  $(CFLAGSSTRICT)
+obj/base642.o: src/base642.cpp inc/base642.h
+	$(CC) -c $< -o $@ $(CFLAGS)  $(CFLAGSSTRICT)
 
 obj/parser.o: src/parser.cpp inc/parser.h
 	$(CC) -c $< -o $@ $(CFLAGS) $(CFLAGSSTRICT)
@@ -59,12 +59,11 @@ test_version: obj/version.o tests/version.cpp
 test_random: obj/random.o tests/random.cpp
 	$(CC) $^ -o bin/$@ $(CFLAGS) $(CFLAGSSTRICT)
 
-#base64: obj/base64.o tests/base64.cpp
-#	$(CC) $^ -o bin/$@ $(CFLAGS) $(CFLAGSSTRICT)
-
 test_matrix2d: obj/matrix2d.o tests/matrix2d.cpp
 	$(CC) $^ -o bin/$@ $(CFLAGS) $(CFLAGSSTRICT)
 
+test_base642: obj/base642.o tests/base642.cpp
+	$(CC) $^ -o bin/$@ $(CFLAGS) $(CFLAGSSTRICT)
 
 
 .PHONY: clean mrproper

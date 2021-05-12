@@ -25,9 +25,19 @@
 *                               PROTOTYPES                                 *
 \**************************************************************************/
 
+/*
+ * Let's name token a couple of strings <key, value> (both are strings)
+ * Nothing in the code prevents having more of two entites on a line
+ * So make sure nothing in your files will go unparsed
+ */
+
 namespace libspu
 {
+    // create a token out of a string, using delim as separator
     std::vector<std::string> str_explode(std::string const & s, char delim);
+
+
+    // returns a vector containing of tokens from a filename
     std::vector<std::vector<std::string>> getTokensFromFile(std::string fileName, char delimiter = ';');
 }
 
