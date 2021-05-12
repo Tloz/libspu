@@ -97,7 +97,7 @@
 
 #define SPU_SEMVER_x 0
 #define SPU_SEMVER_y 3
-#define SPU_SEMVER_z 2
+#define SPU_SEMVER_z 3
 #define SPU_SEMVER_DEFADDENDUM ""
 #define SPU_SEMVER_API_TARGET "https://api.github.com/repos/Tloz/libspu/releases/latest";
 #define SPU_INFO "https://github.com/Tloz/libspu"
