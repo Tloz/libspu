@@ -33,8 +33,8 @@ namespace libspu
     class Coord
     {
     private:
-        float m_a;
-        float m_b;
+        float m_a;    // x or r
+        float m_b;    // y or angle
         // float m_c; // implement 3D
         bool m_polar; // true means polar system, false means cartesian
     public:
@@ -45,8 +45,8 @@ namespace libspu
 
         void fromCartesian(float x, float y);
         void fromPolar(float r, float angle);
-        bool cartesian();
-        bool polar();
+        bool isCartesian();
+        bool isPolar();
         void convertToCartesian();
         void convertToPolar();
         float x();
