@@ -56,7 +56,7 @@ obj/matrix2d.o: src/matrix2d.cpp
 test_version: obj/version.o tests/version.cpp
 	$(CC) $^ -o bin/$@ $(CFLAGS) $(CFLAGSSTRICT)
 
-test_random: obj/random.o tests/random.cpp
+test_random: obj/random.o tests/random.cpp tests/random_functions.cpp
 	$(CC) $^ -o bin/$@ $(CFLAGS) $(CFLAGSSTRICT)
 
 test_matrix2d: obj/matrix2d.o tests/matrix2d.cpp
