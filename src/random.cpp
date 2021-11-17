@@ -48,3 +48,10 @@ int libspu::dice(int dice_max_value)
 {
     return random_int(1, dice_max_value);
 }
+
+bool libspu::throw_under(int threshold, int dice_max_value)
+{
+    if(dice(dice_max_value) <= threshold)
+        return true;
+    return false;
+}
