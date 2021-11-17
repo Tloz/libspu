@@ -6,7 +6,7 @@ int libspu::random_int(int min, int max)
 {
     if(min > max)
         throw exception();
-    return min + rand() % (max - min);
+    return min + rand() % (max - min + 1);
 }
 
 float libspu::random_float()
@@ -46,18 +46,4 @@ string libspu::random_string(int length)
 int libspu::dice(int dice_max_value)
 {
     return random_int(1, dice_max_value);
-}
-
-bool libspu::throw_under(int threshold, int dice_max_value)
-{
-    if(dice(dice_max_value) <= threshold)
-        return true;
-    return false;
-}
-
-bool libspu::throw_over(int threshold, int dice_max_value)
-{
-    if(dice(dice_max_value) >= threshold)
-        return true;
-    return false;
 }

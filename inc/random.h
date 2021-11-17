@@ -33,6 +33,7 @@
 
 #include <string>
 #include <cstdlib> // For RAND_MAX
+#include <utility> // for std::pair
 
 /**************************************************************************\
 *                               PROTOTYPES                                 *
@@ -40,7 +41,7 @@
 
 namespace libspu
 {
-        // returns a random int between min and max
+        // returns a random int between min and max included
         int random_int(int min = 0 , int max = RAND_MAX);
 
         // returns a random float
@@ -52,14 +53,8 @@ namespace libspu
         // returns a random string of length alnum char
         std::string random_string(int length = 10);
 
-        // return a random value between 1 and dice_max_value
+        // return a random value between 1 and dice_max_value included
         int dice(int dice_max_value);
-
-        // tells if the throw is sucessfull (random value must be lower or equal to threshold)
-        bool throw_under(int threshold, int dice_max_value = 100);
-
-        // tells if the throw is sucessfull (random value must be greater or equal to threshold)
-        bool throw_over(int threshold, int dice_max_value = 20);
 }
 
 #endif // RANDOM_H /*************** END OF FILE - random.h ****************/
