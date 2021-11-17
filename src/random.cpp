@@ -40,7 +40,6 @@ string libspu::random_string(int length)
     for (int i = 0; i < length; ++i) 
         tmp_s += alphanum[rand() % (sizeof(alphanum) - 1)];
     
-    
     return tmp_s;
 }
 
@@ -52,6 +51,13 @@ int libspu::dice(int dice_max_value)
 bool libspu::throw_under(int threshold, int dice_max_value)
 {
     if(dice(dice_max_value) <= threshold)
+        return true;
+    return false;
+}
+
+bool libspu::throw_over(int threshold, int dice_max_value)
+{
+    if(dice(dice_max_value) >= threshold)
         return true;
     return false;
 }
